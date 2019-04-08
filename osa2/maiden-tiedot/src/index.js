@@ -20,10 +20,11 @@ const App = () => {
   return (
     <>
       <SearchForm
-        handleChange={ (e) => setQuery(e.target.value) } />
+        handleChange={ e => setQuery(e.target.value) } />
       <Content
         data={data}
-        query={query} />
+        query={query}
+        handleSelect={setQuery} />
     </>
   )
 }

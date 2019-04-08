@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 
 import Item from './Item'
 
-const Content = ({ data, query, handleClick }) => {
-  const [ item, setItem ] = useState(null)
-
+const Content = ({ data, query, handleSelect }) => {
   const filtered = data.filter(({ name }) =>
     name.toLowerCase().includes(query.toLowerCase())
   )
 
+  console.dir(filtered)
+  
   const message = (txt, alt) => (
     <div>
       <h3>{txt}</h3>
@@ -20,7 +20,7 @@ const Content = ({ data, query, handleClick }) => {
     <div key={name}>
       <span>{name}</span>
       <button 
-        onClick={handleClick}
+        onClick={ () => handleSelect(name) }
         type="button">
         ⟶
       </button>
