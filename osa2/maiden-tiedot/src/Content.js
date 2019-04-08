@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import Item from './Item'
+import WeatherForecast from './WeatherForecast'
 
 const Content = ({ data, query, handleSelect }) => {
   const filtered = data.filter(({ name }) =>
@@ -27,7 +28,10 @@ const Content = ({ data, query, handleSelect }) => {
     </div>
   )
   const singleItem = () => (
-    <Item data={filtered[0]} />
+    <>
+      <Item data={filtered[0]} />
+      <WeatherForecast cityName={filtered[0].capital} />
+    </>
   )
 
   return (
