@@ -1,20 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
+import axios from 'axios'
 
 import Filter from './Filter'
 import PersonForm from './PersonForm'
 import Person from './Person'
 
 const App = () => {
-  const [ persons, setPersons ] = useState([
-    { name: 'Arto Hellas', number: '040-123456' },
-    { name: 'Martti Tienari', number: '040-123456' },
-    { name: 'Arto Järvinen', number: '040-123456' },
-    { name: 'Lea Kutvonen', number: '040-123456' }
-  ])
+  const [ persons, setPersons ] = useState([])
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber] = useState('')
   const [ filter, setFilter ] = useState('')
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/persons')
+      .then(res => {
+        setPersons(res.data)
+      })
+  }, [])
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
@@ -29,13 +33,13 @@ const App = () => {
     setPersons( persons.concat(newPerson) )
   }
 
-  const names = () => persons.filter(({ name }) => {
+  const names = persons.filter(({ name }) => {
     return filter
       ? name.toLowerCase().includes(filter.toLowerCase())
       : true
-    
-  }).map(({ name, number }) =>
+  }).map(({ id, name, number }) =>
     <Person
+      key={id}
       name={name}
       number={number} />
   )
@@ -51,7 +55,7 @@ const App = () => {
         handleNumberChange={(e) => setNewNumber(e.target.value)}
         handleSubmit={handleFormSubmit} />
       <h2>contacts</h2>
-      {names()}
+      {names}
     </>
   )
 }
