@@ -1,49 +1,24 @@
 {
   "persons": [
     {
-      "name": "Arto Hellas",
-      "number": "040-123456",
+      "name": "Mikko Jarvinen",
+      "number": "040-1249042",
       "id": 1
     },
     {
-      "name": "Martti Tienari",
-      "number": "040-123456",
-      "id": 2
-    },
-    {
-      "name": "Arto Järvinen",
-      "number": "040-123456",
+      "name": "Biru AOs",
+      "number": "050-9124",
       "id": 3
     },
     {
-      "name": "Lea Kutvonen",
-      "number": "040-123456",
+      "name": "Makolei Kalkin",
+      "number": "050-9124",
       "id": 4
     },
     {
-      "name": "Minna Koskinen",
-      "number": "213-3123",
+      "name": "Face Molodec",
+      "number": "050-9124",
       "id": 5
-    },
-    {
-      "name": "Jenna Holmi",
-      "number": "020-1231",
-      "id": 6
-    },
-    {
-      "name": "Anni Loisku",
-      "number": "050-1255",
-      "id": 7
-    },
-    {
-      "name": "Lari Pomodoro",
-      "number": "020-1235",
-      "id": 8
-    },
-    {
-      "name": "Julia Serena",
-      "number": "040-1778",
-      "id": 9
     }
   ]
 }

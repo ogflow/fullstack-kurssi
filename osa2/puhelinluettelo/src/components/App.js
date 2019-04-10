@@ -19,7 +19,7 @@ const App = () => {
       })
   }, [])
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = e => {
     e.preventDefault()
 
     if (persons.some(person => person.name === newName))
@@ -28,13 +28,25 @@ const App = () => {
     const newPerson = {
       name: newName,
       number: newNumber,
-      id: persons.length + 1
+      id: persons.length ? persons[persons.length - 1].id + 1 : 1
     }
     personService
       .create(newPerson)
       .then(createdNote =>
         setPersons(persons.concat(createdNote))
       )
+  }
+
+  const handlePersonDelete = id => {
+    if (window.confirm('Are you sure?'))
+      personService
+        .deleteBy(id)
+        .then(res => {
+          console.log(`person with id ${id} was deleted`)
+          setPersons(persons.filter(person =>
+            person.id !== id ? person : false
+          ))
+        })
   }
 
   const names = persons.filter(({ name }) => {
@@ -45,7 +57,8 @@ const App = () => {
     <Person
       key={id}
       name={name}
-      number={number} />
+      number={number}
+      deletePerson={() => handlePersonDelete(id)} />
   )
 
   return (
