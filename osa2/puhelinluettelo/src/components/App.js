@@ -58,7 +58,7 @@ const App = () => {
             ? updatedPerson
             : person
         ))
-        showNotification(`${updatedPerson.name} was updated`)
+        showNotification(`${updatedPerson.name}'s number was updated`)
       })
   }
 
