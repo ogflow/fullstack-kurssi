@@ -59,7 +59,9 @@ const App = () => {
     if (window.confirm('Are you sure?'))
     return personService
       .deleteBy(id)
-      .then(res => {
+      .then(success => {
+        if (!success) 
+          return window.alert(`Can't delete person with id ${id}`)
         console.log(`person with id ${id} was deleted`)
         setPersons(persons.filter(person =>
           person.id !== id ? person : false
@@ -67,7 +69,7 @@ const App = () => {
       })
   }
 
-  const names = persons.filter(({ name }) => {
+  const names = () => persons.filter(({ name }) => {
     return filter
       ? name.toLowerCase().includes(filter.toLowerCase())
       : true
@@ -88,9 +90,9 @@ const App = () => {
       <PersonForm
         handleNameChange={(e) => setNewName(e.target.value)}
         handleNumberChange={(e) => setNewNumber(e.target.value)}
-        handleSubmit={handleFormSubmit} />
+        handleSubmit={ handleFormSubmit } />
       <h2>contacts</h2>
-      {names}
+      {names()}
     </>
   )
 }

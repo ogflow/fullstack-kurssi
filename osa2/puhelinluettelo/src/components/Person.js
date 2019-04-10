@@ -6,7 +6,7 @@ const Person = ({ name, number, deletePerson }) => {
       {name} {number}
       <button
         type="button"
-        onClick={deletePerson}>
+        onClick={ deletePerson }>
         delete
       </button>
     </p>
