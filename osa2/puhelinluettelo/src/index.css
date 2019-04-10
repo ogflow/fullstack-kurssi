@@ -9,7 +9,16 @@
   padding: 12px 16px;
   margin: 20px;
 
-  background: black;
+  background: mediumblue;
   color: white;
   font-weight: bold;
+}
+.notification--error {
+  background: crimson;
+}
+.notification--warning {
+  background: goldenrod;
+}
+.notification--success { 
+  background: seagreen;
 }

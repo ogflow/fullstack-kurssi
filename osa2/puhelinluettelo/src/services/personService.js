@@ -13,7 +13,9 @@ const create = newObject => {
 }
 
 const update = (id, newObject) => {
-  const req = axios.put(`${baseUrl}/${id}`, newObject)
+  const req = axios
+    .put(`${baseUrl}/${id}`, newObject)
+    .catch()
   return req.then(res => res.data)
 }
 

@@ -4,15 +4,12 @@ import personService from '../services/personService'
 import Filter from './Filter'
 import PersonForm from './PersonForm'
 import Person from './Person'
-import Notification from './Notification'
 
-const App = () => {
+const App = ({ showNotification }) => {
   const [ persons, setPersons ] = useState([])
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber] = useState('')
   const [ filter, setFilter ] = useState('')
-
-  const [ notification, setNotification ] = useState(null)
 
   useEffect(() => {
     personService
@@ -31,7 +28,7 @@ const App = () => {
     if (existing)
       return existing.number !== newNumber
         ? handlePersonUpdating(existing)
-        : showNotification(`${newName} already exists!`)
+        : showNotification(`${newName} already exists!`, 'warning')
 
     const newPerson = {
       name: newName,
@@ -44,8 +41,9 @@ const App = () => {
       .create(newPerson)
       .then(createdPerson => {
         setPersons(persons.concat(createdPerson))
-        showNotification(`${createdPerson.name} was created succesfully`)
+        showNotification(`${createdPerson.name} was created succesfully`, 'success')
       })
+      .catch(err => showNotification('Can\'t create new person', 'error'))
   }
 
   const handlePersonUpdating = existing => {
@@ -58,28 +56,22 @@ const App = () => {
             ? updatedPerson
             : person
         ))
-        showNotification(`${updatedPerson.name}'s number was updated`)
+        showNotification(`${updatedPerson.name}'s number was updated`, 'success')
       })
+      .catch(err => showNotification(`Can't update ${existing.name}`, 'error'))
   }
 
   const handlePersonDelete = (id, name) => {
     if (window.confirm('Are you sure?'))
     return personService
       .deleteBy(id)
-      .then(success => {
-        if (!success) 
-          return showNotification(`Can't delete ${name}`)
-
-        showNotification(`${name} was deleted succesfully`)
+      .then(res => {
+        showNotification(`${name} was deleted succesfully`. success)
         setPersons(persons.filter(person =>
           person.id !== id ? person : false
         ))
       })
-  }
-
-  const showNotification = (message) => {
-    setNotification(message)
-    setTimeout(() => setNotification(null), 3000)
+      .catch(err => showNotification(`Can't delete ${name}`, 'error'))
   }
 
   const names = () => persons.filter(({ name }) => {
@@ -96,8 +88,6 @@ const App = () => {
 
   return (
     <>
-      <Notification 
-        message={notification} />
       <h1>Contacts list</h1>
       <Filter 
         handleChange={(e) => setFilter(e.target.value)} />

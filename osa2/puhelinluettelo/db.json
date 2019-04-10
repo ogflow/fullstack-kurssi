@@ -1,19 +1,14 @@
 {
   "persons": [
     {
-      "name": "Mikko Jarvinen",
-      "number": "040-1249042",
-      "id": 1
+      "name": "Xena Bocha",
+      "number": "050-53121",
+      "id": 9
     },
     {
-      "name": "Anni Lohela",
-      "number": "040-12944",
-      "id": 7
-    },
-    {
-      "name": "Julia Suvela",
-      "number": "040-1223",
-      "id": 8
+      "name": "Anton Mocha",
+      "number": "0292-212",
+      "id": 10
     }
   ]
 }
